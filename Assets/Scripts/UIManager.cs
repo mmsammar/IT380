@@ -34,10 +34,7 @@ public class UIManager : MonoBehaviour
             case "00TitleScene":
                 break;
             case "01IntroScene":
-                introText.text = "Welcome to Learning ROCKS!\n\n" +
-                    "Learn about rocks and minerals by becoming a mining master!";
-                introImage.SetActive(true);
-                backButton.SetActive(false);
+                IntroInit();
                 break;
             case "02TutorialScene":
                 break;
@@ -46,23 +43,33 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    void IntroInit()
+    {
+        introText.horizontalAlignment = HorizontalAlignmentOptions.Center;
+        introText.text = "Welcome to Learning ROCKS!\n\n" +
+            "Learn about rocks and minerals by becoming a mining master!";
+        introImage.SetActive(true);
+        backButton.SetActive(false);
+    }
+
     public void IntroSequenceBack()
     {
-        introSequence = introSequence - 2;
-        IntroSequenceNext();
+        introSequence --;
+        SetIntroSequence();
     }
 
     public void IntroSequenceNext()
     {
         introSequence++;
+        SetIntroSequence();
+    }
+
+    void SetIntroSequence()
+    {
         switch (introSequence)
         {
             case 0:
-                introText.horizontalAlignment = HorizontalAlignmentOptions.Center;
-                introText.text = "Welcome to Learning ROCKS!\n\n" +
-                    "Learn about rocks and minerals by becoming a mining master!";
-                introImage.SetActive(true);
-                backButton.SetActive(false);
+                IntroInit();
                 break;
             case 1:
                 introImage.SetActive(false);
@@ -80,7 +87,8 @@ public class UIManager : MonoBehaviour
                 introText.text = "COMPETING SOFTWARE SUGGESTED IMPROVEMENTS";
                 break;
             case 5:
-                introText.text = "STAKEHOLDERS";
+                introText.text = "STAKEHOLDERS\n\n" +
+                    "USERS";
                 break;
             case 6:
                 introText.text = "PERSONA";
